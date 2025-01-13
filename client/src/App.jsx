@@ -25,6 +25,7 @@ import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/msal-react';
 import ChatWindow from './components/ChatWindow';
+import TinyEditor from "./components/TinyEditor";
 
 // import './App.css';
 
@@ -78,12 +79,13 @@ const MainContent = () => {
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={6} md={8}>
-                    <ProfileContent />
+                            <ProfileContent />
                         </Grid>
-                        <Grid className="chatbotSpace" item xs={6} md={4}>
-                        <ChatWindow />
+                        <Grid className="editorSpace" item xs={6} md={4} sx={{textAlign: 'left'}} >
+                            <TinyEditor />
                         </Grid>
                     </Grid>
+                            <ChatWindow />
                 </Box>
             </AuthenticatedTemplate>
 
