@@ -1,12 +1,14 @@
 import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
 
-export default function IconButtons({ IconButton }) {
+export default function IconButtons({ Icon, calendarEventId }) {
+
+  const hanldeClick = (calendarEventId) =>{
+    alert(calendarEventId)
+  }
   return (
     <IconButton color="primary" aria-label="">
-      <IconButton onClick={() => {
-        alert('clicked');
-      }} />
+      <Icon onClick={() => hanldeClick(calendarEventId)} />
     </IconButton>
   );
 }

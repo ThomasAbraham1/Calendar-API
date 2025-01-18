@@ -33,7 +33,7 @@ export default function CalendarData(props) {
     const isoDate = item.start.dateTime;
     // Convert UTC to IST and format in 12-hour format
     const {formattedTime, day, fullDate} = dateFormatter(isoDate)
-    return { id: index, subject: item.subject, time: formattedTime, date: fullDate, day: day}
+    return { id: item['@odata.etag'], subject: item.subject, time: formattedTime, date: fullDate, day: day}
   });
   // Sorting the array based on date
   calendarRows.sort((a, b) => new Date(b.date) - new Date(a.date));
