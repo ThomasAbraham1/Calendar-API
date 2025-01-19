@@ -14,9 +14,9 @@ import "./app.css";
 // }
 
 // export default App
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
-import { PageLayout } from './Components/PageLayout';
+import { PageLayout } from './Components/API Components/PageLayout';
 import { loginRequest } from './authConfig';
 import { callMsGraph } from './graph';
 import { ProfileData } from './components/ProfileData';
@@ -24,8 +24,9 @@ import CalendarData from './components/CalendarData';
 import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/msal-react';
-import ChatWindow from './components/ChatWindow';
+import ChatWindow from './components/Chat Components/ChatWindow';
 import TinyEditor from "./components/TinyEditor";
+import { calendarContextFunction } from "./Contexts/calendarContext";
 
 // import './App.css';
 
@@ -36,7 +37,7 @@ import Button from 'react-bootstrap/Button';
 */
 const ProfileContent = () => {
     const { instance, accounts } = useMsal();
-    const [graphData, setGraphData] = useState(null);
+    const { graphData, setGraphData } = useContext(calendarContextFunction());
 
     function RequestProfileData() {
         // Silently acquires an access token which is then attached to a request for MS Graph data
@@ -81,11 +82,11 @@ const MainContent = () => {
                         <Grid item xs={6} md={8}>
                             <ProfileContent />
                         </Grid>
-                        <Grid className="editorSpace" item xs={6} md={4} sx={{textAlign: 'left'}} >
+                        <Grid className="editorSpace" item xs={6} md={4} sx={{ textAlign: 'left' }} >
                             <TinyEditor />
                         </Grid>
                     </Grid>
-                            <ChatWindow />
+                    <ChatWindow />
                 </Box>
             </AuthenticatedTemplate>
 

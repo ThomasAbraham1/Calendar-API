@@ -1,5 +1,5 @@
 import React from "react";
-import CalendarTableLayout from "./CalendarTableLayout";
+import CalendarTableLayout from "./API Components/CalendarTableLayout";
 import { tableBodyClasses } from "@mui/material";
 /**
  * Renders information about the user obtained from MS Graph 

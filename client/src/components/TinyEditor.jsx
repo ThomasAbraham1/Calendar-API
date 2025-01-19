@@ -1,8 +1,8 @@
 import { useRef, useContext } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { textStreamContextFunction } from "../Contexts/textStreamContext";
-import BasicButton from "./BasicButton"
-import BasicTextField from './BasicTextField';
+import BasicButton from "./Pure UI Components/BasicButton"
+import BasicTextField from './Pure UI Components/BasicTextField';
 
 
 export default function TinyEditor() {

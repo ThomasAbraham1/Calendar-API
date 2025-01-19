@@ -7,8 +7,8 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 
 import { useIsAuthenticated } from "@azure/msal-react";
-import { SignInButton } from "./SignInButton";
-import { SignOutButton } from "./SignOutButton";
+import { SignInButton } from "../SignInButton";
+import { SignOutButton } from "../SignOutButton";
 // import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
