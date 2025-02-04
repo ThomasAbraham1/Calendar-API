@@ -15,7 +15,7 @@ export async function callMsGraph(accessToken) {
         headers: headers
     };
 
-    return fetch(graphConfig.graphCalendarEndPoint, options)
+    return fetch(graphConfig.graphMeetingRecording, options)
         .then(response => response.json())
         .catch(error => console.log(error));
 }

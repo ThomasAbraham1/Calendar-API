@@ -1,6 +1,25 @@
 {
   "dependencies": {
     "@azure/msal-react": "^2.2.0",
+    "concurrently": "^9.1.2",
     "package": "^1.0.1"
-  }
+  },
+  "name": "calendar-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "setup": "concurrently \"cd client && npm install --force\" \" cd server && npm install && npm i nodemon -g\" ",
+    "start": "concurrently \"cd client && npm run dev\" \" cd server && nodemon app.js\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasAbraham1/Calendar-API.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThomasAbraham1/Calendar-API/issues"
+  },
+  "homepage": "https://github.com/ThomasAbraham1/Calendar-API#readme",
+  "description": ""
 }

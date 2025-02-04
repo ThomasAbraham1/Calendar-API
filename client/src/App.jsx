@@ -1,20 +1,7 @@
-// import Stack from '@mui/material/Stack';
-// import Button from '@mui/material/Button';
-import "./app.css";
-
-// function App() {
-
-//   return (
-//     <>
-//     <Stack spacing={2} direction="row">
-//       <Button variant="contained">Sign In</Button>
-//     </Stack>
-//     </>
-//   )
-// }
 
 // export default App
 import React, { useState, useContext } from 'react';
+
 
 import { PageLayout } from './Components/API Components/PageLayout';
 import { loginRequest } from './authConfig';
@@ -27,7 +14,7 @@ import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/
 import ChatWindow from './components/Chat Components/ChatWindow';
 import TinyEditor from "./components/TinyEditor";
 import { calendarContextFunction } from "./Contexts/calendarContext";
-
+import { toasterContextFunction } from './Contexts/toasterContext';
 // import './App.css';
 
 import Button from 'react-bootstrap/Button';
@@ -47,7 +34,10 @@ const ProfileContent = () => {
                 account: accounts[0],
             })
             .then((response) => {
-                callMsGraph(response.accessToken).then((response) => setGraphData(response));
+                callMsGraph(response.accessToken).then((response) => {
+                    setGraphData(response);
+                }
+                );
             });
     }
 
@@ -102,11 +92,15 @@ const MainContent = () => {
 };
 
 export default function App() {
+    const {Toaster, toast} = useContext(toasterContextFunction());
     return (
+        <>
         <PageLayout>
+        <Toaster position="top-center" />
             <center>
                 <MainContent />
             </center>
         </PageLayout>
+        </>
     );
 }

@@ -64,5 +64,5 @@ export const loginRequest = {
  */
 export const graphConfig = {
     graphMeEndpoint: "https://graph.microsoft.com/v1.0/me",
-    graphCalendarEndPoint: "https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location&$top=25",
+    graphCalendarEndPoint: "https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location,originalStartTimeZone&$top=55"
 };
