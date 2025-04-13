@@ -10,6 +10,9 @@ import Modal from '@mui/material/Modal';
 import axios from 'axios';
 import LinearProgress from '@mui/material/LinearProgress';
 import { toasterContextFunction } from '../../Contexts/toasterContext';
+
+const API_URL = import.meta.env.VITE_URL;
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -88,7 +91,7 @@ export default function BasicDropDown() {
       const transcriptionPromise = new Promise((resolve, reject) => {
 
       })
-      const response = axios.post('http://localhost:3000/upload', formData, {
+      const response = axios.post(`${API_URL}/upload`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);

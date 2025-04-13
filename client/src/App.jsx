@@ -74,7 +74,9 @@ const ProfileContent = () => {
 */
 const MainContent = () => {
     return (
+        
         <div className="App">
+            {console.log(import.meta.env.VITE_URL)}
             <AuthenticatedTemplate>
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2} sx={{

@@ -15,7 +15,7 @@ export const msalConfig = {
     auth: {
         clientId: "2d7bd0ea-e99d-4f86-be48-16f208de6ae5",
         authority: "https://login.microsoftonline.com/889f01fa-03d0-4530-abb4-236917784343",
-        redirectUri: "http://localhost:5173",
+        redirectUri: import.meta.env.VITE_KEY, // You must register this URI on Azure portal
     }, 
     cache: {
         cacheLocation: "sessionStorage", // This configures where your cache will be stored

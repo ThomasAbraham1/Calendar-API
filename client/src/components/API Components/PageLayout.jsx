@@ -95,7 +95,7 @@ export const PageLayout = (props) => {
               >
                 CAPI
               </Typography>
-              <BasicDropDown /> 
+              {/* <BasicDropDown />  */}
               <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
 
                 {isAuthenticated ? <SignOutButton /> : <SignInButton />}

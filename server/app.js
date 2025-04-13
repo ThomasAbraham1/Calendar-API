@@ -5,47 +5,26 @@ const path = require("path");
 const cors = require('cors');
 const timeConvertor = require('./timeConvertor');
 const axios = require('axios');
-const { router } = require('./routes/routes')
+const { router } = require('./routes/routes');
+const dotenv = require('dotenv');
+dotenv.config();
+const BASE_URL = process.env.BASE_URL;
+console.log(BASE_URL)
 
 
 // Create an Express app
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: [BASE_URL],
     methods: ["GET", "POST"],
     credentials: true,
 }));
 // File path to store chat history
 // const historyFilePath = path.join(__dirname, "chatHistory.json");
-const historyFilePath = path.join(__dirname, "../chatHistory.json");
+const historyFilePath = path.join(__dirname, "./chatHistory.json");
 
 
-
-
-
-// const apiKey = 'ZNKgEB9XnVl7sVbBDaXq';
-// const domain = 'gracesoft731450578028512.freshdesk.com';
-// const ticketId = 1808; // The ID of the ticket you want to fetch
-// const url = `https://${domain}/api/v2/tickets/${ticketId}`;
-// // Sales agent ID: 1070027220869
-// const config = {
-//     auth: {
-//         username: apiKey,
-//         password: 'X' // 'X' is the placeholder for the password in the curl command
-//     },
-//     headers: {
-//         'Content-Type': 'application/json'
-//     }
-// };
-
-// axios.get(url, config)
-//     .then(response => {
-//         console.log('Ticket details:', response.data);
-//     })
-//     .catch(error => {
-//         console.error('Error fetching ticket:', error.response ? error.response.data : error.message);
-//     });
 
 // Function to read history from the file  
 const loadChatHistory = () => {
@@ -144,5 +123,5 @@ app.use("/", router);
 // Start the server
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on PORT ${PORT}`);
 });

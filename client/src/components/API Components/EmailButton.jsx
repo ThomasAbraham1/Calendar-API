@@ -13,7 +13,7 @@ import { chatContextFunction } from "../../Contexts/chatContext";
 import axios from 'axios';
 import { toasterContextFunction } from '../../Contexts/toasterContext';
 import { MsalAccessTokenContextFunction } from "../../Contexts/MsalAccessTokenContext";
-
+const API_URL = import.meta.env.VITE_URL;
 
 
 const style = {
@@ -63,7 +63,7 @@ export default function BasicModal({ calendarEventId, Icon, joinUrl }) {
     const ParseTextToChat = (selectedEmailTemplate, htmlInvitation, eventType, eventDate, originalStartTimeZone, joinUrl) => {
         console.log("Inside parsetext function");
         // timezoneConvertor(originalStartTimeZone, eventDate);
-        axios.post("http://localhost:3000/timeConvertor", { originalStartTimeZone: originalStartTimeZone, eventDate: eventDate }).then(async (response) => {
+        axios.post(`${API_URL}/timeConvertor`, { originalStartTimeZone: originalStartTimeZone, eventDate: eventDate }).then(async (response) => {
             var { date, time } = response.data;
             var queryForEmail = "";
             console.log(selectedEmailTemplate);
@@ -123,7 +123,7 @@ export default function BasicModal({ calendarEventId, Icon, joinUrl }) {
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Choose an email template:
+                        Choose an email template: 
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         {calendarEventId}

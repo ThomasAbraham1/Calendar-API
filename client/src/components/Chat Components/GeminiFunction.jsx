@@ -1,10 +1,11 @@
 import axios from 'axios';
 import {useContext} from "react";
+const API_URL = import.meta.env.VITE_URL;
 
 
 export const GeminiFunction = async (text, setTextStream, resolve, reject, chatInputType) => {
 
-        axios.post("http://localhost:3000/query", { prompt: text }).then(async (response) => {
+        axios.post(`${API_URL}/query`, { prompt: text }).then(async (response) => {
             console.log(response.data.response);
             const answer = response.data.response;
             setTextStream(answer);
