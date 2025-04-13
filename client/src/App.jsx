@@ -16,7 +16,7 @@ import TinyEditor from "./components/TinyEditor";
 import { calendarContextFunction } from "./Contexts/calendarContext";
 import { toasterContextFunction } from './Contexts/toasterContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import './App.css';
+import './app.css';
 import {MsalAccessTokenContextFunction} from "./Contexts/MsalAccessTokenContext";
 
 import Button from 'react-bootstrap/Button';
