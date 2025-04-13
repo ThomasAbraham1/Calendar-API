@@ -112,7 +112,7 @@ export default function App() {
             try {
                 const connectionPromise = axios.get(import.meta.env.VITE_URL + '/connectionCheck');
                 toast.promise(connectionPromise, {
-                    loading: 'Loading...',
+                    loading: 'Connecting to free tier back-end service, wait for around 50 seconds...',
                     success: (data) => {
                         console.log(data)
                         return `${data.data.name}`;
