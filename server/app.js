@@ -7,7 +7,7 @@ const timeConvertor = require('./timeConvertor');
 const axios = require('axios');
 const { router } = require('./routes/routes');
 const dotenv = require('dotenv'); 
-dotenv.config();
+dotenv.config(); 
 var ORIGIN_URL = process.env.ORIGIN_URL_PRODUCTION;
 var PORT = process.env.PORT || 3000;
 if (process.env.NODE_ENV != 'production') {
@@ -110,6 +110,10 @@ app.post("/timeConvertor", function (req, res) {
     var { originalStartTimeZone, eventDate } = req.body;
     var { date, time } = timeConvertor(originalStartTimeZone, eventDate);
     res.send({ date, time });
+})
+
+app.get("/connectionCheck", function (req, res) {
+    res.send({ name: "Connection successful" });
 })
 
 

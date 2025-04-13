@@ -1,8 +1,7 @@
 
 // export default App
-import React, { useState, useContext } from 'react';
-
-
+import React, { useState, useContext, useEffect } from 'react';
+import axios from 'axios';
 import { PageLayout } from './components/API Components/PageLayout';
 import { loginRequest } from './authConfig';
 import { callMsGraph } from './graph';
@@ -17,7 +16,7 @@ import { calendarContextFunction } from "./Contexts/calendarContext";
 import { toasterContextFunction } from './Contexts/toasterContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './app.css';
-import {MsalAccessTokenContextFunction} from "./Contexts/MsalAccessTokenContext";
+import { MsalAccessTokenContextFunction } from "./Contexts/MsalAccessTokenContext";
 
 import Button from 'react-bootstrap/Button';
 const darkTheme = createTheme({
@@ -25,11 +24,12 @@ const darkTheme = createTheme({
         mode: 'dark',
     },
 });
+
 /**
 * Renders information about the signed-in user or a button to retrieve data about the user
 */
 const ProfileContent = () => {
-    const {accessToken, setAccessToken} = React.useContext(MsalAccessTokenContextFunction());
+    const { accessToken, setAccessToken } = React.useContext(MsalAccessTokenContextFunction());
     const { instance, accounts } = useMsal();
     const { graphData, setGraphData } = useContext(calendarContextFunction());
 
@@ -74,7 +74,7 @@ const ProfileContent = () => {
 */
 const MainContent = () => {
     return (
-        
+
         <div className="App">
             {console.log(import.meta.env.VITE_URL)}
             <AuthenticatedTemplate>
@@ -107,6 +107,24 @@ const MainContent = () => {
 
 export default function App() {
     const { Toaster, toast } = useContext(toasterContextFunction());
+    useEffect(() => {
+        const connectionCheck = async () => {
+            try {
+                const connectionPromise = axios.get(import.meta.env.VITE_URL + '/connectionCheck');
+                toast.promise(connectionPromise, {
+                    loading: 'Loading...',
+                    success: (data) => {
+                        console.log(data)
+                        return `${data.data.name}`;
+                    },
+                    error: (data) => "Error connecting to free tier back-end server:"
+                });
+            } catch (error) {
+                console.log("Error connecting to free tier back-end server: " + error.message);
+            }
+        };
+        connectionCheck();
+    }, [toast]);
     return (
         <>
             <PageLayout className="mainScreen">
