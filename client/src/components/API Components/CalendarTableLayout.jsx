@@ -1,4 +1,4 @@
-import BasicModal from "../Pure UI Components/BasicModal";
+import EmailButton from "./EmailButton";
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -30,7 +30,7 @@ const columns = [
   },
   {
     id: 'getEmail',
-    label: 'Get Email',
+    label: 'Email / Record.',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toFixed(2),
@@ -45,6 +45,7 @@ function createData(name, code, population, size) {
 
 export default function CalendarTableLayout(props) {
   const rows = props.rows;
+  // console.log(rows )
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -90,7 +91,7 @@ export default function CalendarTableLayout(props) {
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {column.id === 'getEmail' ? (
-                            <BasicModal Icon={OpenInNewIcon} calendarEventId={row.id} />
+                            <EmailButton Icon={OpenInNewIcon} calendarEventId={row.id} joinUrl={row.joinUrl} />
                           ) : (
                             column.format && typeof value === 'number' ? column.format(value) : value
                           )}

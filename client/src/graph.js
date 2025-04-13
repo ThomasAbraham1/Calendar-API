@@ -7,7 +7,7 @@ import { graphConfig } from "./authConfig";
 export async function callMsGraph(accessToken) {
     const headers = new Headers();
     const bearer = `Bearer ${accessToken}`;
-
+console.log(accessToken)
     headers.append("Authorization", bearer);
 
     const options = {
@@ -15,7 +15,7 @@ export async function callMsGraph(accessToken) {
         headers: headers
     };
 
-    return fetch(graphConfig.graphMeetingRecording, options)
+    return fetch(graphConfig.graphCalendarEndPoint, options)
         .then(response => response.json())
         .catch(error => console.log(error));
 }

@@ -2,7 +2,8 @@
   "dependencies": {
     "@azure/msal-react": "^2.2.0",
     "concurrently": "^9.1.2",
-    "package": "^1.0.1"
+    "package": "^1.0.1",
+    "timezonecomplete": "^5.13.1"
   },
   "name": "calendar-api",
   "version": "1.0.0",

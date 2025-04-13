@@ -15,14 +15,21 @@ import ChatWindow from './components/Chat Components/ChatWindow';
 import TinyEditor from "./components/TinyEditor";
 import { calendarContextFunction } from "./Contexts/calendarContext";
 import { toasterContextFunction } from './Contexts/toasterContext';
-// import './App.css';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import './App.css';
+import {MsalAccessTokenContextFunction} from "./Contexts/MsalAccessTokenContext";
 
 import Button from 'react-bootstrap/Button';
-
+const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+});
 /**
 * Renders information about the signed-in user or a button to retrieve data about the user
 */
 const ProfileContent = () => {
+    const {accessToken, setAccessToken} = React.useContext(MsalAccessTokenContextFunction());
     const { instance, accounts } = useMsal();
     const { graphData, setGraphData } = useContext(calendarContextFunction());
 
@@ -34,8 +41,10 @@ const ProfileContent = () => {
                 account: accounts[0],
             })
             .then((response) => {
+                setAccessToken(response.accessToken);
                 callMsGraph(response.accessToken).then((response) => {
                     setGraphData(response);
+                    // console.log(accessToken)
                 }
                 );
             });
@@ -68,7 +77,10 @@ const MainContent = () => {
         <div className="App">
             <AuthenticatedTemplate>
                 <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={2} sx={{
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}>
                         <Grid item xs={6} md={8}>
                             <ProfileContent />
                         </Grid>
@@ -92,15 +104,15 @@ const MainContent = () => {
 };
 
 export default function App() {
-    const {Toaster, toast} = useContext(toasterContextFunction());
+    const { Toaster, toast } = useContext(toasterContextFunction());
     return (
         <>
-        <PageLayout>
-        <Toaster position="top-center" />
-            <center>
-                <MainContent />
-            </center>
-        </PageLayout>
+            <PageLayout className="mainScreen">
+                <Toaster position="top-center" />
+                <center>
+                    <MainContent />
+                </center>
+            </PageLayout>
         </>
     );
 }

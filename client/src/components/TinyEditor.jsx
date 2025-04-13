@@ -6,6 +6,7 @@ import BasicTextField from './Pure UI Components/BasicTextField';
 
 
 export default function TinyEditor() {
+
   const { textStream, setTextStream } = useContext(textStreamContextFunction());
   const editorRef = useRef(null);
   const log = () => {
@@ -13,9 +14,9 @@ export default function TinyEditor() {
       console.log(editorRef.current.getContent() + "HELLOasda");
     }
   };
-  
+
   return (
-    <>  
+    <div style={{}}>
       <BasicTextField label={"Send To:"} />
       <BasicTextField label={"CC:"} />
       <Editor
@@ -23,6 +24,9 @@ export default function TinyEditor() {
         onInit={(_evt, editor) => editorRef.current = editor}
         initialValue={textStream}
         init={{
+          selector: 'textarea',  // change this value according to your HTML
+          skin: 'oxide-dark',
+          content_css: 'dark',
           height: 500,
           menubar: false,
           plugins: [
@@ -39,6 +43,6 @@ export default function TinyEditor() {
       />
       <BasicButton onClickFn={log} />
       {/* <button onClick={log}>Email</button> */}
-    </>
+    </div>
   );
 }

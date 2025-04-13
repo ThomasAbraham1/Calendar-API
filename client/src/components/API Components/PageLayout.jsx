@@ -24,6 +24,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import BasicDropDown  from "../Pure UI Components/BasicDropDown";
+
 
 /**
  * Renders the navbar component with a sign in or sign out button depending on whether or not a user is authenticated
@@ -31,8 +34,15 @@ import Button from '@mui/material/Button';
 // @param props
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 export const PageLayout = (props) => {
+
   const isAuthenticated = useIsAuthenticated();
+
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -63,63 +73,67 @@ export const PageLayout = (props) => {
 
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent:"center", mt:"2rem"}} >
-        <CssBaseline />
-        <AppBar component="nav">
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
+      <ThemeProvider theme={darkTheme}>
+
+        <Box className="mainScreen" sx={{ display: 'flex', justifyContent: "center", mt: "2rem" }} >
+          <CssBaseline />
+          <AppBar component="nav">
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { sm: 'none' } }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+              >
+                CAPI
+              </Typography>
+              <BasicDropDown /> 
+              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+
+                {isAuthenticated ? <SignOutButton /> : <SignInButton />}
+              </Box>
+            </Toolbar>
+          </AppBar>
+          <nav>
+            <Drawer
+              container={container}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+              sx={{
+                display: { xs: 'block', sm: 'none' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+              }}
             >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-            >
-              MUI
-            </Typography>
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {isAuthenticated ? <SignOutButton /> : <SignInButton />}
-            </Box>
-          </Toolbar>
-        </AppBar>
-        <nav>
-          <Drawer
-            container={container}
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-            sx={{
-              display: { xs: 'block', sm: 'none' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-            }}
-          >
-            {isAuthenticated ? <SignOutButton /> : <SignInButton />}
-          </Drawer>
-        </nav>
+            </Drawer>
+          </nav>
 
-        <Box component="main" >
-          <Toolbar />
-          <Typography>
-            <h5>
-              <center>
-                Welcome to the Microsoft Authentication Library For JavaScript -
-                React SPA Tutorial
-              </center>
-            </h5>
-            {props.children}
-          </Typography>
-        </Box>
+          <Box component="main">
+            <Toolbar />
+            <Typography>
+              <h5>
+                <center>
+                  Welcome to the Microsoft Authentication Library For JavaScript -
+                  React SPA Tutorial
+                </center>
+              </h5>
+              {props.children}
+            </Typography>
+          </Box>
 
-        {/* <Navbar bg="primary" variant="dark" className="navbarStyle">
+          {/* <Navbar bg="primary" variant="dark" className="navbarStyle">
         <a className="navbar-brand" href="/">
         Microsoft Identity Platform
         </a>
@@ -128,7 +142,8 @@ export const PageLayout = (props) => {
         </div>
         </Navbar> */}
 
-      </Box>
+        </Box>
+      </ThemeProvider>
     </>
   );
 };

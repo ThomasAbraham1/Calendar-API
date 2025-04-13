@@ -34,7 +34,8 @@ export default function CalendarData(props) {
     const isoDate = item.start.dateTime;
     // Convert UTC to IST and format in 12-hour format
     const {formattedTime, day, fullDate} = dateFormatter(isoDate);
-    return { id: item['@odata.etag'], subject: item.subject, time: formattedTime, date: fullDate, day: day}
+    const joinUrl = item['onlineMeeting'] != null ? item['onlineMeeting'].joinUrl : null;
+    return { id: item['@odata.etag'],joinUrl: joinUrl, subject: item.subject, time: formattedTime, date: fullDate, day: day}
   });
   // Sorting the array based on date
   calendarRows.sort((a, b) => new Date(b.date) - new Date(a.date));
