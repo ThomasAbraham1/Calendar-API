@@ -9,7 +9,6 @@ const { router } = require('./routes/routes');
 const dotenv = require('dotenv');
 dotenv.config();
 const BASE_URL = process.env.BASE_URL;
-console.log(BASE_URL)
 
 
 // Create an Express app

@@ -3,7 +3,7 @@
 import React, { useState, useContext } from 'react';
 
 
-import { PageLayout } from './Components/API Components/PageLayout';
+import { PageLayout } from './components/API Components/PageLayout';
 import { loginRequest } from './authConfig';
 import { callMsGraph } from './graph';
 import { ProfileData } from './components/ProfileData';
