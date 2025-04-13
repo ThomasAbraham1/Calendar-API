@@ -6,16 +6,21 @@ const cors = require('cors');
 const timeConvertor = require('./timeConvertor');
 const axios = require('axios');
 const { router } = require('./routes/routes');
-const dotenv = require('dotenv');
+const dotenv = require('dotenv'); 
 dotenv.config();
-const BASE_URL = process.env.BASE_URL;
+var ORIGIN_URL = process.env.ORIGIN_URL_PRODUCTION;
+var PORT = process.env.PORT || 3000;
+if (process.env.NODE_ENV != 'production') {
+    ORIGIN_URL = process.env.ORIGIN_URL_DEVELOPMENT;
+    console.log(ORIGIN_URL)
+}
 
 
 // Create an Express app
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-    origin: [BASE_URL],
+    origin: [ORIGIN_URL], 
     methods: ["GET", "POST"],
     credentials: true,
 }));
@@ -120,7 +125,7 @@ app.post("/timeConvertor", function (req, res) {
 // })
 app.use("/", router);
 // Start the server
-const PORT = 3000;
+
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);
 });
