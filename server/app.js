@@ -7,6 +7,7 @@ const timeConvertor = require('./timeConvertor');
 const axios = require('axios');
 const { router } = require('./routes/routes');
 const dotenv = require('dotenv'); 
+const { dbConnect } = require('./db/db');
 dotenv.config(); 
 var ORIGIN_URL = process.env.ORIGIN_URL_PRODUCTION;
 var PORT = process.env.PORT || 3000;
@@ -15,6 +16,8 @@ if (process.env.NODE_ENV != 'production') {
     console.log(ORIGIN_URL)
 }
 
+// Database connection
+dbConnect()
 
 // Create an Express app
 const app = express();

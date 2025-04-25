@@ -11,6 +11,9 @@ function timezoneConvertor(timezoneName, eventDate) {
     } else if (timezoneName === "Pacific Standard Time") {
         timezoneName = "America/Los_Angeles";
         timezoneAbbreviation = "PST"
+    } else if (timezoneName === "India Standard Time") {
+        timezoneName = "Asia/Calcutta";
+        timezoneAbbreviation = "IST"
     } else {
         timezoneName = "America/Chicago";
         timezoneAbbreviation = "CST"
@@ -27,7 +30,7 @@ function timezoneConvertor(timezoneName, eventDate) {
     var time = formattedTime + " " + timezoneAbbreviation;
     var date = tcUTCDateObject.format("MM/dd/yyyy");
 
-    return({date, time});
+    return ({ date, time });
 }
 
 module.exports = timezoneConvertor
