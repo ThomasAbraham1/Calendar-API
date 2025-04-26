@@ -81,7 +81,7 @@ const MainContent = () => {
         <div className="App">
             {console.log(import.meta.env.VITE_URL)}
             <AuthenticatedTemplate>
-                <OneTimeWelcomeForm isOpen={false} />
+                <OneTimeWelcomeForm isOpen={true} />
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2} sx={{
                         justifyContent: "center",

@@ -8,26 +8,22 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import axios from "axios"
 import { toasterContextFunction } from '../../Contexts/toasterContext';
-import { WelcomeFormContextFunction } from "../../Contexts/WelcomeFormContext"
-
 
 
 const API_URL = import.meta.env.VITE_URL;
 
-export default function OneTimeWelcomeForm({ isOpen, mode }) {
+export default function OneTimeWelcomeForm({isOpen}) {
 
-  // console.log(mode)
   const { Toaster, toast } = React.useContext(toasterContextFunction());
   const userName = localStorage.getItem('userName');
   const [name, setName] = React.useState(userName)
   const userId = localStorage.getItem('userId');
   // console.log(userId + "ALLAHUKABAR")
   // console.log(isOpen) 
-  const { openDialog: open, setDialog: setOpen } = React.useContext(WelcomeFormContextFunction());
+  const [open, setOpen] = React.useState(isOpen);
 
   React.useEffect(() => {
     const doesUserExist = async () => {
-
       toast.promise(axios.post(`${API_URL}/doesUserExist`, {
         userName: name,
         userId: userId
@@ -46,7 +42,7 @@ export default function OneTimeWelcomeForm({ isOpen, mode }) {
         }
       })
     }
-    if (!mode.updateMode) doesUserExist();
+    doesUserExist();
   }, [])
 
   const handleClickOpen = () => {
@@ -129,8 +125,4 @@ export default function OneTimeWelcomeForm({ isOpen, mode }) {
       </Dialog>
     </React.Fragment>
   );
-}
-
-OneTimeWelcomeForm.defaultProps = {
-  mode: { updateMode: false }
 }

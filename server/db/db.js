@@ -8,7 +8,7 @@ if (process.env.NODE_ENV != 'production') {
 
 const dbConnect = async () => { 
     mongoose.connect(dbUrl)
-        .then(() => console.log('Connected!'));
+        .then(() => console.log('Connected!')); 
 }
 
 module.exports = {mongoose, dbConnect};
