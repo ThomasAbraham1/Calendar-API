@@ -4,9 +4,9 @@ dotenv.config();
 var dbUrl = process.env.dbUrl_PRODUCTION;
 if (process.env.NODE_ENV != 'production') {
     dbUrl = process.env.dbUrl_DEVELOPMENT;
-}
+}  
 
-const dbConnect = async () => {
+const dbConnect = async () => { 
     mongoose.connect(dbUrl)
         .then(() => console.log('Connected!'));
 }

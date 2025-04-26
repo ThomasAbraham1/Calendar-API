@@ -25,7 +25,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import BasicDropDown  from "../Pure UI Components/BasicDropDown";
+import BasicDropDown from "../Pure UI Components/BasicDropDown";
+import SettingsMenu from "../Pure UI Components/SettingsMenu"
 
 
 /**
@@ -96,7 +97,10 @@ export const PageLayout = (props) => {
                 CAPI
               </Typography>
               {/* <BasicDropDown />  */}
+              {/* {isAuthenticated ? <SettingsMenu /> : <></>} */}
               <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+
+
 
                 {isAuthenticated ? <SignOutButton /> : <SignInButton />}
               </Box>
@@ -125,8 +129,7 @@ export const PageLayout = (props) => {
             <Typography>
               <h5>
                 <center>
-                  Welcome to the Microsoft Authentication Library For JavaScript -
-                  React SPA Tutorial
+                  Welcome to Calendar API powered by Microsoft Authentication Library
                 </center>
               </h5>
               {props.children}

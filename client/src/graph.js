@@ -15,7 +15,9 @@ console.log(accessToken)
         headers: headers
     };
 
-    return fetch(graphConfig.graphCalendarEndPoint, options)
-        .then(response => response.json())
-        .catch(error => console.log(error));
+    // return fetch(graphConfig.graphCalendarEndPoint, options)
+    //     .then(response => response.json())
+    //     .catch(error => console.log(error));
+    const [calendarGraphData, profileGraphData] = await Promise.all([fetch(graphConfig.graphCalendarEndPoint, options), fetch(graphConfig.graphMeEndpoint, options)]);
+    return [await calendarGraphData.json(), await profileGraphData.json()]
 }

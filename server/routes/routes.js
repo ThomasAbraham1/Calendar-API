@@ -7,13 +7,14 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });  
 
-router.use(bodyParser.json());
+router.use(bodyParser.json()); 
 router.use(bodyParser.urlencoded({ extended: true }));
 
 
 
 router.post('/upload', upload.single('file'), meetingTranscribeController);
-router.post('/userRegistration', registerUser, findUser);
+router.post('/userRegistration', registerUser);
+router.post('/doesUserExist', findUser); 
 
 
 module.exports={

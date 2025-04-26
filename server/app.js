@@ -115,13 +115,13 @@ app.post("/timeConvertor", function (req, res) {
     res.send({ date, time });
 })
 
-app.get("/connectionCheck", function (req, res) {
+app.get("/connectionCheck", function (req, res) { 
     res.send({ name: "Connection successful" });
-})
+}) 
 
 
 
-// app.get("/freshdesk", function (req, res) {
+// app.get("/freshdesk", function (req, res) { 
 //     axios.get(url, config)
 //         .then(response => {
 //             console.log('Ticket details:', response.data);
@@ -136,3 +136,4 @@ app.use("/", router);
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);
 });
+ 

@@ -17,6 +17,7 @@ import { toasterContextFunction } from './Contexts/toasterContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './app.css';
 import { MsalAccessTokenContextFunction } from "./Contexts/MsalAccessTokenContext";
+import OneTimeWelcomeForm from "./components/Pure UI Components/OneTimeWelcomeForm";
 
 import Button from 'react-bootstrap/Button';
 const darkTheme = createTheme({
@@ -43,8 +44,10 @@ const ProfileContent = () => {
             .then((response) => {
                 setAccessToken(response.accessToken);
                 callMsGraph(response.accessToken).then((response) => {
-                    setGraphData(response);
-                    // console.log(accessToken)
+                    setGraphData(response[0]);
+                    localStorage.setItem("userName", response[1].displayName);
+                    localStorage.setItem("userId", response[1].id);
+                    console.log(response[1])
                 }
                 );
             });
@@ -56,7 +59,7 @@ const ProfileContent = () => {
             <br />
             {graphData ? (
                 <>
-                    <ProfileData graphData={graphData} />
+                    <ProfileData graphData={graphData.value} />
                     <CalendarData rows={graphData.value} />
                 </>
             ) : (
@@ -78,6 +81,7 @@ const MainContent = () => {
         <div className="App">
             {console.log(import.meta.env.VITE_URL)}
             <AuthenticatedTemplate>
+                <OneTimeWelcomeForm isOpen={false} />
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2} sx={{
                         justifyContent: "center",
