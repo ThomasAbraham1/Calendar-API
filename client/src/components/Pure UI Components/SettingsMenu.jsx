@@ -5,12 +5,12 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import SettingsIcon from '@mui/icons-material/Settings';
 import OneTimeWelcomeForm from "./OneTimeWelcomeForm"
-import {WelcomeFormContextFunction} from "../../Contexts/WelcomeFormContext"
+// import {WelcomeFormContextFunction} from "../../Contexts/userProfileContext"
 
 
 export default function SettingsMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const { openDialog: open, setDialog: setOpen } = React.useContext(WelcomeFormContextFunction());
+    // const { openDialog: open, setDialog: setOpen } = React.useContext(WelcomeFormContextFunction());
 
 
 

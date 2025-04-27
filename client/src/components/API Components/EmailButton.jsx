@@ -13,6 +13,8 @@ import { chatContextFunction } from "../../Contexts/chatContext";
 import axios from 'axios';
 import { toasterContextFunction } from '../../Contexts/toasterContext';
 import { MsalAccessTokenContextFunction } from "../../Contexts/MsalAccessTokenContext";
+import { userProfileContextFunction } from "../../Contexts/userProfileContext"
+
 const API_URL = import.meta.env.VITE_URL;
 
 
@@ -39,6 +41,15 @@ export default function BasicModal({ calendarEventId, Icon, joinUrl }) {
     const { setTextStream } = React.useContext(textStreamContextFunction());
     const { setMessageList } = React.useContext(chatContextFunction());
     const [recordingLink, setRecordingLink] = React.useState(null);
+    const { userName, setUserName } = React.useContext(userProfileContextFunction());
+    const userNameRef = React.useRef('');
+
+
+
+    React.useEffect(() => {
+        userNameRef.current = userName;
+        console.log(userNameRef.current);
+    }, [userName])
 
     // Finds the event records using the event ID that's passed to this component (calenderEventId)
     const emailTypeFunction = (e) => {
@@ -61,6 +72,7 @@ export default function BasicModal({ calendarEventId, Icon, joinUrl }) {
     }
     // Based on selected email template, prepares the prompt for AI
     const ParseTextToChat = (selectedEmailTemplate, htmlInvitation, eventType, eventDate, originalStartTimeZone, joinUrl) => {
+
         console.log("Inside parsetext function");
         // timezoneConvertor(originalStartTimeZone, eventDate);
         axios.post(`${API_URL}/timeConvertor`, { originalStartTimeZone: originalStartTimeZone, eventDate: eventDate }).then(async (response) => {
@@ -71,6 +83,7 @@ export default function BasicModal({ calendarEventId, Icon, joinUrl }) {
             if (selectedEmailTemplate == "MISSED MEETING") queryForEmail = missedMeetingTemplate + htmlInvitation + "\n " + eventInfo;
             if (selectedEmailTemplate == "REMINDER") queryForEmail = reminderTemplate + htmlInvitation + "\n " + eventInfo;
             if (selectedEmailTemplate == "CONFIRMATION") queryForEmail = confirmationTemplate + htmlInvitation + "\n " + eventInfo;
+            queryForEmail += ".THIS IS THE IMPORTANT PART!! KEEP IN MIND.. In-case if I asked for email generation and you're giving me an email, use " + userNameRef.current + " instead of Thomas Abraham as the name in email signature along with other info about the company like company name and phone number 713-981-5300 x 400 \n The response should always be in HTML but ```html and the ending ``` is not needed and";
             console.log(queryForEmail);
             var message = {
                 author: "me",
@@ -91,7 +104,7 @@ export default function BasicModal({ calendarEventId, Icon, joinUrl }) {
         }).then((response) => {
             console.log(response)
             axios.get("")
-        }).catch(err =>{
+        }).catch(err => {
             console.log(err)
         })
     }
@@ -123,7 +136,7 @@ export default function BasicModal({ calendarEventId, Icon, joinUrl }) {
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Choose an email template: 
+                        Choose an email template:
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         {calendarEventId}
@@ -134,7 +147,7 @@ export default function BasicModal({ calendarEventId, Icon, joinUrl }) {
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         Check for recording?
                     </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2, overflowWrap: 'break-word',  overflow: 'auto'  }}>
+                    <Typography id="modal-modal-description" sx={{ mt: 2, overflowWrap: 'break-word', overflow: 'auto' }}>
                         {joinUrl}
                         <Button onClick={findRecording} variant="text">Yes</Button>
                     </Typography>

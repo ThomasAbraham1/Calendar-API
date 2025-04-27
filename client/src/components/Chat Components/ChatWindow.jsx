@@ -4,11 +4,14 @@ import { GeminiFunction } from './GeminiFunction';
 import { textStreamContextFunction } from "../../Contexts/textStreamContext";
 import { chatContextFunction } from "../../Contexts/chatContext";
 import { toasterContextFunction } from '../../Contexts/toasterContext';
+import { userProfileContextFunction } from "../../Contexts/userProfileContext"
 
 
 const ChatWindow = () => {
     const { messageList, setMessageList } = useContext(chatContextFunction());
     const { Toaster, toast } = useContext(toasterContextFunction());
+    const { userName, setUserName } = React.useContext(userProfileContextFunction());
+
 
     // const [messageList, setMessageList] = useState([]);
     const { textStream, setTextStream } = useContext(textStreamContextFunction());
@@ -34,8 +37,10 @@ const ChatWindow = () => {
         } else {
             setMessageList(prevMessageList => [...prevMessageList, message]);
             // const promptResult = await GeminiFunction(message.data.text, setTextStream);
-            const promptResult = new Promise((resolve, reject) => {
-                GeminiFunction(message.data.text, setTextStream, resolve, reject, chatInputType);
+            const promptResult = new Promise((resolve, reject) => { 
+                var text = message.data.text;
+                text += ". CONTEXT:  FROM HERE, THE REST OF THE TEXT IS ONLY INSTRUcTION THAT YOU KEEP IN YOUR MIND, NOT TALK ABOUT IT TO ME. LIke if I said Hi, don't say that you'll abide by the following instructions, just keep it in mind and be normal. The response should always be in HTML tags but ```html and the ending ``` is not needed and in-case if I asked for email generation and you're giving me an email, use " + userName + " instead of Thomas Abraham as the name in email signature along with other info about the company like company name and phone number";
+                GeminiFunction(text, setTextStream, resolve, reject, chatInputType);
             })
             toast.promise(promptResult, {
                 loading: 'Loading...',

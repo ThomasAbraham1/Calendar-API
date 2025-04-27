@@ -32,7 +32,7 @@ app.use(cors({
 const historyFilePath = path.join(__dirname, "./chatHistory.json");
 
 
-
+ 
 // Function to read history from the file  
 const loadChatHistory = () => {
     try {
@@ -119,7 +119,7 @@ app.get("/connectionCheck", function (req, res) {
     res.send({ name: "Connection successful" });
 }) 
 
-
+ 
 
 // app.get("/freshdesk", function (req, res) { 
 //     axios.get(url, config)

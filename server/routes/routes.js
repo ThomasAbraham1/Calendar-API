@@ -10,7 +10,7 @@ const upload = multer({ dest: 'uploads/' });
 router.use(bodyParser.json()); 
 router.use(bodyParser.urlencoded({ extended: true }));
 
-
+ 
 
 router.post('/upload', upload.single('file'), meetingTranscribeController);
 router.post('/userRegistration', registerUser);

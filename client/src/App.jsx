@@ -18,6 +18,8 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './app.css';
 import { MsalAccessTokenContextFunction } from "./Contexts/MsalAccessTokenContext";
 import OneTimeWelcomeForm from "./components/Pure UI Components/OneTimeWelcomeForm";
+import { userProfileContextFunction } from "./Contexts/userProfileContext"
+
 
 import Button from 'react-bootstrap/Button';
 const darkTheme = createTheme({
@@ -33,9 +35,10 @@ const ProfileContent = () => {
     const { accessToken, setAccessToken } = React.useContext(MsalAccessTokenContextFunction());
     const { instance, accounts } = useMsal();
     const { graphData, setGraphData } = useContext(calendarContextFunction());
+    const { userName, setUserName } = React.useContext(userProfileContextFunction());
+    const { userId, setUserId } = React.useContext(userProfileContextFunction());
 
-    function RequestProfileData() {
-        // Silently acquires an access token which is then attached to a request for MS Graph data
+    useEffect(() => {
         instance
             .acquireTokenSilent({
                 ...loginRequest,
@@ -45,12 +48,19 @@ const ProfileContent = () => {
                 setAccessToken(response.accessToken);
                 callMsGraph(response.accessToken).then((response) => {
                     setGraphData(response[0]);
-                    localStorage.setItem("userName", response[1].displayName);
-                    localStorage.setItem("userId", response[1].id);
-                    console.log(response[1])
+                    setUserName(response[1].displayName);
+                    setUserId(response[1].id);
+                    // localStorage.setItem("userName", response[1].displayName);
+                    // localStorage.setItem("userId", response[1].id);
+                    console.log(response[1] + "LAVADA")
                 }
                 );
             });
+    }, [])
+
+    function RequestProfileData() {
+        // Silently acquires an access token which is then attached to a request for MS Graph data
+
     }
 
     return (
@@ -66,7 +76,8 @@ const ProfileContent = () => {
                 // <Button variant="secondary" onClick={RequestProfileData}>
                 //     Request Profile Information
                 // </Button>
-                <RequestProfileData></RequestProfileData>
+                <></>
+
             )}
         </>
     );
@@ -81,7 +92,6 @@ const MainContent = () => {
         <div className="App">
             {console.log(import.meta.env.VITE_URL)}
             <AuthenticatedTemplate>
-                <OneTimeWelcomeForm isOpen={true} />
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2} sx={{
                         justifyContent: "center",
@@ -96,6 +106,7 @@ const MainContent = () => {
                     </Grid>
                     <ChatWindow />
                 </Box>
+                <OneTimeWelcomeForm isOpen={false} />
             </AuthenticatedTemplate>
 
             <UnauthenticatedTemplate>

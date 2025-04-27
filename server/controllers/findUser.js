@@ -1,6 +1,7 @@
 const { User } = require('../db/models/user');
 
 const findUser = async (req, res, next) => {
+    console.log(req.body)
     const result = User.findOne({ userId: req.body.userId }).then((user) => {
         if (user) {
             console.log('User found:', user);

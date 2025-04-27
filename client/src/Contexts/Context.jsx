@@ -5,7 +5,7 @@ import { calendarContextFunction } from "./calendarContext";
 import { toasterContextFunction } from "./toasterContext"
 import { modalContextFunction } from "./modalContext"
 import { MsalAccessTokenContextFunction } from "./MsalAccessTokenContext"
-import { WelcomeFormContextFunction } from "./WelcomeFormContext"
+import { userProfileContextFunction } from "./userProfileContext"
 import { Toaster, toast } from 'sonner'
 
 const textStreamContext = textStreamContextFunction();
@@ -14,7 +14,7 @@ const calendarContext = calendarContextFunction();
 const toasterContext = toasterContextFunction();
 const modalContext = modalContextFunction();
 const msalAccessTokenContext = MsalAccessTokenContextFunction();
-const WelcomeFormContext = WelcomeFormContextFunction();
+const userProfileContext = userProfileContextFunction();
 
 
 
@@ -24,11 +24,12 @@ export default function Context({ children }) {
     const [graphData, setGraphData] = useState(null);
     const [open, setOpen] = useState(false);
     const [accessToken, setAccessToken] = useState(null);
-    const [openDialog, setDialog] = useState(false);
+    const [userName, setUserName] = useState(null);
+    const [userId, setUserId] = useState('');
 
 
     return (
-        <WelcomeFormContext.Provider value={{ openDialog, setDialog }}>
+        <userProfileContext.Provider value={{ userName, setUserName, userId, setUserId }}>
             <textStreamContext.Provider value={{ textStream, setTextStream }}>
                 <chatContext.Provider value={{ messageList, setMessageList }}>
                     <calendarContext.Provider value={{ graphData, setGraphData }}>
@@ -42,7 +43,7 @@ export default function Context({ children }) {
                     </calendarContext.Provider>
                 </chatContext.Provider>
             </textStreamContext.Provider>
-        </WelcomeFormContext.Provider>
+        </userProfileContext.Provider>
 
     )
 }
