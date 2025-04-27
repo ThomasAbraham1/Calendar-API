@@ -139,18 +139,18 @@ export default function BasicModal({ calendarEventId, Icon, joinUrl }) {
                         Choose an email template:
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        {calendarEventId}
+                        {/* {calendarEventId} */}
                         <Button onClick={emailTypeFunction} variant="text">Confirmation</Button>
                         <Button onClick={emailTypeFunction} variant="text">Reminder</Button>
                         <Button onClick={emailTypeFunction} variant="text">Missed meeting</Button>
                     </Typography>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                    {/* <Typography id="modal-modal-title" variant="h6" component="h2">
                         Check for recording?
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2, overflowWrap: 'break-word', overflow: 'auto' }}>
                         {joinUrl}
                         <Button onClick={findRecording} variant="text">Yes</Button>
-                    </Typography>
+                    </Typography> */}
                 </Box>
             </Modal>
         </div>
