@@ -54,6 +54,7 @@ export default function OneTimeWelcomeForm({ isOpen }) {
           error: (error) => {
             if (error.response?.status === 404) {
               setOpen(true); // Open dialog if user doesn't exist
+              setUserName(null)
               return 'Choose your email signature';
             }
             return 'An error occurred';

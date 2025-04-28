@@ -30,7 +30,7 @@ const columns = [
   },
   {
     id: 'getEmail',
-    label: 'Email / Record.',
+    label: 'Email',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toFixed(2),
